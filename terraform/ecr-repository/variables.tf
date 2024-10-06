@@ -3,7 +3,12 @@ variable "aws_region" {
   type        = string
 }
 
-variable "ecr_repository_name" {
-  description = "The name of the ECR repository."
+variable "ingestion_ecr_repository_name" {
+  description = "The name of the ECR repository for the ingestion lambda."
+  type        = string
+}
+
+variable "rag_ecr_repository_name" {
+  description = "The name of the ECR repository for the RAG lambda."
   type        = string
 }
