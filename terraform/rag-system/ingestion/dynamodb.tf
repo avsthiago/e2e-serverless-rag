@@ -13,9 +13,4 @@ resource "aws_dynamodb_table" "lance_db_commit_store" {
     name = "version"
     type = "N"
   }
-
-  tags = {
-    Name        = "LanceDB Commit Store Table"
-    Environment = "Production"
-  }
 }
