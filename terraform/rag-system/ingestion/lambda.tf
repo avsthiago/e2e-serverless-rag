@@ -91,68 +91,6 @@ locals {
   )
 }
 
-
-
-
-# # Custom policies
-# resource "aws_iam_policy" "lambda_policy" {
-#   name        = "${local.ingestion_lambda_function_name}-policy"
-#   path        = "/"
-#   description = "Policy for Lambda function to access required AWS services"
-
-#   policy = jsonencode({
-#     # Version = "2012-10-17",
-#     # Statement = [
-#     #   {
-#     #     Sid = "DataStoreAndVectorDBPermissions",
-#     #     Effect      = "Allow",
-#     #     Action = [
-#     #       "s3:GetObject",
-#     #       "s3:ListBucket",
-#     #       "s3:PutObject",
-#     #       "s3:DeleteObject"
-#     #     ],
-#     #     Resource = [
-#     #       aws_s3_bucket.data_source.arn,
-#     #       "${aws_s3_bucket.data_source.arn}/*",
-#     #       aws_s3_bucket.vector_db.arn,
-#     #       "${aws_s3_bucket.vector_db.arn}/*"
-#     #     ]
-#     #   },
-#       # {
-#       #   Sid = "DynamoDBPermissions",
-#       #   Effect      = "Allow",
-#       #   Action = [
-#       #     "dynamodb:CreateTable",
-#       #     "dynamodb:DescribeTable",
-#       #     "dynamodb:PutItem",
-#       #     "dynamodb:GetItem",
-#       #     "dynamodb:UpdateItem",
-#       #     "dynamodb:DeleteItem",
-#       #     "dynamodb:Scan",
-#       #     "dynamodb:Query"
-#       #   ],
-#       #   Resource = aws_dynamodb_table.lance_db_commit_store.arn
-#       # },
-#       {
-#         Sid = "TextractAndBedrockPermissions",
-#         Effect      = "Allow",
-#         Action = [
-#           "textract:*",
-#           "bedrock:*"
-#         ],
-#         Resource = "*"
-#       }
-#     ]
-#   })
-# }
-
-# # Attach Custom Policy to Lambda Role
-# resource "aws_iam_role_policy_attachment" "lambda_custom_policy" {
-#   role       = aws_iam_role.lambda_role.name
-#   policy_arn = aws_iam_policy.lambda_policy.arn
-# }
-
 module "lambda_function" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "~> 5.0"
