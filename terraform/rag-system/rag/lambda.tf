@@ -52,7 +52,7 @@ locals {
     logs_access = {
       effect = "Allow",
       actions = [
-       "logs:PutLogEvents",
+        "logs:PutLogEvents",
         "logs:CreateLogStream",
         "logs:CreateLogGroup"
       ],
@@ -79,10 +79,10 @@ module "lambda_function" {
   description   = "A function that offers a RAG backend and frontend"
   image_uri     = var.lambda_image_uri
 
-  create_package = false
-  package_type   = "Image"
-  publish        = true
-  attach_policy_statements = true
+  create_package                    = false
+  package_type                      = "Image"
+  publish                           = true
+  attach_policy_statements          = true
   cloudwatch_logs_retention_in_days = 3
 
   memory_size = 1024
@@ -91,11 +91,11 @@ module "lambda_function" {
   policy_statements = local.lambda_policy_statements
 
   environment_variables = {
-    "LANCEDB_S3_BUCKET"   = var.vector_db_bucket_name,
-    "LANCEDB_S3_PATH"     = local.vector_db_s3_path,
+    "VECTOR_DB_S3_PATH"   = local.vector_db_s3_path,
     "DYNAMODB_TABLE_NAME" = local.dynamodb_table_name,
     "LOG_LEVEL"           = var.log_level,
     "AWS_LWA_INVOKE_MODE" = "RESPONSE_STREAM"
+    "AWS_LWA_PORT"        = "8000"
   }
 }
 
