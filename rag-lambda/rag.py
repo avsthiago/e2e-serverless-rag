@@ -78,7 +78,6 @@ Respond to the current query using only the retrieved information and conversati
 2. If the retrieved information is not relevant or insufficient to answer the query, respond with: "I'm sorry, but I don't have enough information in the provided context to answer this question accurately."
 3. Do not use any external knowledge or information not present in this prompt.
     """
-    print(prompt)
 
     return prompt
 

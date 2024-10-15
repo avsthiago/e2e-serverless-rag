@@ -101,9 +101,18 @@ module "lambda_function" {
 
 resource "aws_lambda_function_url" "function_url" {
   function_name      = local.rag_lambda_function_name
-  authorization_type = "NONE"
   invoke_mode        = "RESPONSE_STREAM"
+  authorization_type = "AWS_IAM"
 
+  # TODO: Make this cors configuration more restrictive
+  cors {
+    allow_credentials = true
+    allow_origins     = ["*"]
+    allow_methods     = ["*"]
+    allow_headers     = ["date", "keep-alive"]
+    expose_headers    = ["keep-alive", "date"]
+    max_age           = 86400
+  }
   depends_on = [module.lambda_function]
 }
 
@@ -113,5 +122,6 @@ resource "aws_lambda_permission" "function_url_permission" {
   function_name = local.rag_lambda_function_name
   principal     = "*"
 
-  function_url_auth_type = "NONE"
+  function_url_auth_type = "AWS_IAM"
+  source_account         = var.account_id
 }

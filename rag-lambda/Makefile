@@ -4,7 +4,7 @@
 AWS_ACCOUNT_ID ?= $(shell aws sts get-caller-identity --query Account --output text)
 REGION ?= $(shell aws configure get region)
 IMAGE_NAME := house-rag
-TAG ?= 0.0.8
+TAG ?= 0.0.16
 
 ECR_URI := $(AWS_ACCOUNT_ID).dkr.ecr.$(REGION).amazonaws.com/$(IMAGE_NAME):$(TAG)
 
